@@ -18,10 +18,12 @@ jobs:
       with:
         dotnet-version: 5.0.x
         source-url: https://api.nuget.org/v3/index.json
+      env:
+        NUGET_AUTH_TOKEN: ${{secrets.NUGET_SECRET}}
     - name: Package Release
       run: |
         cd Conperio.FixedWithLineParser
         dotnet pack -c Release -o out
     - name: Push generated package to GitHub registry
-      run: dotnet nuget push ./Conperio.FixedWithLineParser/out/*.nupkg --skip-duplicate --no-symbols true -Username conperio -Password ${{ secrets.NUGET_SECRET }}
+      run: dotnet nuget push ./Conperio.FixedWithLineParser/out/*.nupkg --skip-duplicate --no-symbols true -Password ${{ secrets.NUGET_SECRET }}
         
