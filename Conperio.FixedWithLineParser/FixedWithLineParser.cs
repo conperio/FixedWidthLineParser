@@ -44,12 +44,13 @@ namespace Conperio.FixedWithLineParser
             {
                 var attribute = _attributesDict[memberData.Name];
                 var valueString = line.Substring(attribute.Start - 1, attribute.Length);
-                valueString = valueString.Trim();
 
                 if (string.IsNullOrEmpty(valueString))
                 {
                     continue;
                 }
+
+                valueString = valueString.Trim();
 
                 _accessor[data, memberData.Name] = ParseStringValueToObject(valueString, memberData, attribute);
             }
